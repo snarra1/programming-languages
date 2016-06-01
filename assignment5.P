@@ -1,0 +1,57 @@
+/*
+Q.5. For two sorted lists L1 and L2, prolog predicate merge(L1,L2,Res), Res contains all the elements in sorted order .
+*/
+
+merge([],[],[]).
+merge(L,[],L).
+merge([],R,R).
+merge([H1|T1],[H2|T2],Res) :- 
+(
+	H2>H1 -> merge(T1,[H2|T2],R), Res = [H1|R];
+		 merge([H1|T1],T2,R), Res = [H2|R]
+).
+
+/*
+Q.4. Prolog program position(X,L,Res) that returns Res which stores a list of positions of integer X in list L.
+*/
+
+position(_,[],[]).
+position(X,L,Res) :- findpos(X,1,L,Res).
+
+findpos(_,_,[],[]).
+findpos(X,I,[X|T],[I|Res]) :- I1 is I+1, findpos(X,I1,T,Res).
+findpos(X,I,[H|T],Res) :- X\==H, I1 is I+1, findpos(X,I1,T,Res).
+
+
+/*
+Q.3. Prolog predicate contain(L1,L2) to check if L1 contains all elements of L2.
+*/
+
+contain(_,[]).
+contain(L1,[H|T]):- ismember(H,L1), contain(L1,T).
+
+ismember(X,[X|_]).
+ismember(X,[H|T]) :- X\==H, ismember(X,T).
+
+/*
+Q.2. Prolog predicate deleteNTerm(N,T,Res) that delete every Nth argument of a term T and store the results in Res.
+*/
+
+deleteNTerm(N,T,R):-
+	T=..[F|P],
+	deleten(N,1,P,NewP),
+	R=..[F|NewP].
+
+deleten(_,_,[],[]).
+deleten(N,N,[_|T],Res) :- deleten(N,1,T,Res).
+deleten(N,I,[H|T],[H|Res]) :- I<N, I1 is I+1, deleten(N,I1,T,Res).
+
+/*
+Q.1. Prolog code max(L,Res) to find the maximum integer in a list L and stores max value in Res.
+*/
+
+max([X],X).
+max([H|T],Res) :-  max(T,Res1), 
+( H>Res1 -> Res is H;
+	Res is Res1
+).

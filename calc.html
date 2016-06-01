@@ -1,0 +1,114 @@
+<html>	<!-- Start of html file-->
+ <head>	<!-- Head of html file-->
+	<meta charset="UTF-8">
+	<meta name="AUTHORS" content="SUPRAJA NARRA & PRACHI SHEWALE">
+	<title>My Calculator</title>
+	<style>
+		table
+		{
+			background-color: #E8E8E8;
+		}
+		div.pos
+		{
+			position: fixed;
+			top: 100px;
+			left: 500px;
+		}
+	</style>	<!-- Cascaded Style Sheet to adjust background colour and position -->
+	<script language="javascript" >	//Script tag to write javascript code
+	var bool=0;	//variable bool stores the working status of calculator
+		//screen function definition
+	function screen(val)
+	{	if(bool==1)		//if calc is on then displays val
+		{
+			document.calculator.display.value=val;
+		}
+	}	//status function definition to switch on or off calc
+	function status(val)
+	{
+		bool=val;
+		if(bool==1)
+		{		//calc is on
+			alert("The Calculator is On");
+			calculator.display.value="";
+		}
+		if(bool==0)
+		{		//calc is off
+			alert("Calculator Off");
+			calculator.display.value="";
+		}
+	}	//function definition for displaying clicked button
+	function input(val)
+	{
+		if(bool==1)	//displays clicked button only if calc is on
+		{
+			calculator.display.value+=val;
+		}
+	}	//equ function called when button '=' is pressed
+	function equ()
+	{
+		if(bool==1)
+		{
+			try
+			{	//evaluates the expression in input box and displays it
+				screen(eval(calculator.display.value));
+			}
+			catch (e)
+			{
+			//		screen('Error');
+			}
+		}
+	}
+	</script>	<!-- End of script tag-->
+ </head> <!-- End of head of html file-->
+ <body>	<!-- Body of html file-->
+  <form name="calculator"> <!--Form Name-->
+	<div class="pos" align="center"><br/>
+	<table width="10%" border="5">
+		<tr>	<!--Desining text editor for calculator-->
+			<td align="center">My Calculator</td>
+		</tr>
+		<tr>
+			<td><input type="text" maxlength ="10" size="15" name="display"></td>
+		</tr>
+		<tr>	<!--Designing buttons for numbers and function and calling their respective functions-->
+			<td>
+				<table>
+				<tr>
+					<td><input type="button" name="on" value="on" onclick='status(1)'/></td>
+					<td><input type="button" name="off"value="off" onclick='status(0)' /></td>
+					<td><input type="button" name="zero" value="0" onclick='input(0)' /></td>
+					<td><input type="button" name="one" value="1" onclick='input(1)' /></td>
+				</tr>
+				<tr>
+					<td><input type="button" name="two" Value="2" onclick='input(2)' /></td>
+					<td><input type="button" name="three" value="3" onclick='input(3)' /></td>
+					<td><input type="button" name="four" value="4" onclick='input(4)' /></td>
+					<td><input type="button" name="five" value="5" onclick='input(5)' /></td>
+				</tr>
+				<tr>
+					<td><input type="button" name="six" value="6" onclick='input(6)' /></td>
+					<td><input type="button" name="seven" value="7" onclick='input(7)' /></td>
+					<td><input type="button" name="eight" value="8" onclick='input(8)' /></td>
+					<td><input type="button" name="nine" value="9" onclick='input(9)' /></td>
+				</tr>
+				<tr>
+					<td><input type="button" name="dot" value="." onclick='input(".")'/></td>
+					<td><input type="button" name="opb" value="(" onclick='input("(")' /></td>
+					<td><input type="button" name="clb" value=")" onclick='input(")")' /></td>
+					<td><input type="button" name="add" value="+" onclick='input("+")' /></td>		
+					<td><input type="button" name="sub" value="-" onclick='input("-")' /></td>
+				</tr>
+				<tr>
+					<td><input type="button" name="mul" value="*" onclick='input("*")' /></td>
+					<td><input type="button" name="div" value="/" onclick='input("/")' /></td>
+					<td><input type="button" name="equal" value="=" onclick='equ()' /></td>
+					<td><input type="button" name="clear" value="clear" onclick='screen("")' /></td>		
+				</tr>
+			</table>
+		</tr>
+	</table>	<!-- End of main table-->
+	</div>	<!-- End of Div tag-->
+  <form>	<!-- End of form design-->
+ </body>	<!-- End of Bode -->
+</html>	<!-- End of html file-->
